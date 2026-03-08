@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>LinkKit — Acorta & Genera QR</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/styles.css"/>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <header>
+    <div class="brand">
+      <h1>LINK<span>KIT</span></h1>
+      <p>Tus herramientas de enlace // v1.0</p>
+    </div>
+    <div class="header-badge">2 herramientas</div>
+  </header>
+
+  <!-- TABS -->
+  <div class="tabs">
+    <button class="tab-btn active-shortener" id="tab-short" onclick="switchTab('shortener')">
+      <span class="icon">✂️</span> Acortar Enlace
+    </button>
+    <button class="tab-btn" id="tab-qr" onclick="switchTab('qr')">
+      <span class="icon">⬛</span> Generar Código QR
+    </button>
+  </div>
+
+  <!-- PANEL 1: ACORTADOR -->
+  <div class="panel active" id="panel-shortener">
+    <div class="card">
+      <div class="card-title">Acortar Enlace</div>
+      <div class="card-subtitle">Pega tu URL larga · obtén un enlace corto al instante</div>
+
+      <div class="input-group">
+        <input
+          class="url-input"
+          id="short-input"
+          type="url"
+          placeholder="https://tu-enlace-muy-largo.com/aqui..."
+          autocomplete="off"
+        />
+        <button class="btn btn-orange" id="short-btn" onclick="shortenURL()">
+          Acortar →
+        </button>
+      </div>
+
+      <div class="loader" id="short-loader">
+        <div class="dots"><span></span><span></span><span></span></div>
+        Acortando enlace...
+      </div>
+
+      <div class="error-msg" id="short-error"></div>
+
+      <div class="result-box" id="short-result">
+        <div class="result-content">
+          <div class="result-label">Tu enlace corto</div>
+          <div class="result-url" id="short-url"></div>
+        </div>
+        <button class="btn-copy" id="copy-btn" onclick="copyURL()">Copiar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- PANEL 2: QR -->
+  <div class="panel" id="panel-qr">
+    <div class="card">
+      <div class="card-title">Código QR</div>
+      <div class="card-subtitle">Convierte cualquier enlace o texto en un código QR</div>
+
+      <div class="input-group">
+        <input
+          class="url-input"
+          id="qr-input"
+          type="text"
+          placeholder="https://tu-enlace.com o cualquier texto..."
+          autocomplete="off"
+        />
+        <button class="btn btn-teal" id="qr-btn" onclick="generateQR()">
+          Generar →
+        </button>
+      </div>
+
+      <div class="size-group">
+        <label>Tamaño:</label>
+        <div class="size-btns">
+          <button class="size-btn" onclick="setSize(this, 160)">S</button>
+          <button class="size-btn active" onclick="setSize(this, 220)">M</button>
+          <button class="size-btn" onclick="setSize(this, 300)">L</button>
+        </div>
+      </div>
+
+      <div class="error-msg" id="qr-error"></div>
+
+      <div class="qr-result" id="qr-result">
+        <div class="qr-frame">
+          <div id="qr-container"></div>
+        </div>
+        <div class="qr-url-label">Contenido codificado</div>
+        <div class="qr-url-text" id="qr-url-text"></div>
+        <div class="qr-actions">
+          <button class="btn btn-teal" onclick="downloadQR()">⬇ Descargar PNG</button>
+          <button class="btn btn-ghost" onclick="clearQR()">Limpiar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    LinkKit &mdash; Acorta · Convierte · Comparte
+  </footer>
+
+</div>
+
+<!-- Librería QR -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<!-- Lógica de la app -->
+<script src="js/main.js"></script>
+</body>
+</html>
